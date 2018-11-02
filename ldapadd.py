@@ -11,9 +11,14 @@ URI = 'ldap://ldap.example.jp'
 BIND_DN = 'cn=master,dc=example,dc=jp'
 BIND_PASS = 'secret123'
 
+def main():
+    print('call main')
+    kekka = addtestuser('ldap://ldap.example.jp','cn=master,dc=example,dc=jp','secret123',10000,10020)
+    print('追加しました')
+
 def addtestuser(uri, bind_dn, bind_pass, min_uid, max_uid):
-    ldap = LDAP(uri)
-    ldap.bind(bind_dn, bind_pass)
+    ld = LDAP(URI)
+    ld.bind(BIND_DN, BIND_PASS)
     for uid in range(min_uid, max_uid+1):
         entry_dn = 'uid=test' + str(uid) + ',ou=users,dc=example,dc=jp'
         entry = [('objectClass', ['person', 'posixAccount']),
@@ -22,10 +27,10 @@ def addtestuser(uri, bind_dn, bind_pass, min_uid, max_uid):
                  ('gidNumber', [str(uid)]),
                  ('homeDirectory', ['/home/test' + str(uid)]),
                  ('cn', ['test' + str(uid)]),
-                 ('sn', ['test' + str(uid)])]
-        ldap.add(entry_dn, entry)
+                 ('sn', ['test' + str(uid)]),
+                 ('userPassword', ['secret123'])]
+        result = ld.add(entry_dn,entry)
+    return result
+print('global')
 
-if __name__ == '__main__':
-    addtestuser('bind_dn','bind_pass','max_uid=20','min_uid=10')
-    pprint(result)
-
+main()

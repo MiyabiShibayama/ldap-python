@@ -13,16 +13,23 @@ BIND_DN = 'cn =master,dc=example,dc=jp'
 BASE_DN = 'dc=example,dc=jp'
 BIND_PASS = 'secret123'
 
-def main(uri,bind_dn,base_dn,bind_pass):
+def main():
     print('call main')
+    kekka = delitem('ldap://ldap.example.jp','cn=master,dc=example,dc=jp','dc=example,dc=jp','secretr123')
+    if kekka == 0:
+        print('成功')
+    else:
+        print('失敗')
 
 def delitem(uri, bind_dn, base_dn, bind_pass):
-    ldap = LDAP(uri)
-    ldap.bind(bind_dn,bind_pass)
-    result = ldap.search(base_dn,LDAP_SCOPE_SUB,
-                         ['gidNumber'])
-    print('gidNumber{}を消去しました'.format(uri,bind_dn,base_dn,bind_pass))
+    print('call delitem')
+    #ld = LDAP(uri)
+    #ld.bind(bind_dn,bind_pass)
+    #result = (ld.search(base_dn,LDAP_SCOPE_SUB,['gidNumber'])
 
+    result = 1 
     return result
+print('global')
 
-main('uri','bind_dn','base_dn','bind_pass')
+
+main()
