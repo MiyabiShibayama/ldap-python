@@ -1,10 +1,12 @@
-#!/usr/bin/env python
-#-*-coding: utf-8-*-
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+# vi: set expandtab shiftwidth=4 :
 
-# miyabi2アカウントをldapaddで追加する
+#まだ途中
+
+# ldapdeletemiyabi.py
 
 from libldap import LDAP
-from libldap import LDAP_SCOPE_SUB
 
 URI = 'ldap://ldap.example.jp'
 BIND_DN = 'cn=master,dc=example,dc=jp'
@@ -12,15 +14,13 @@ BASE_DN = 'dc=example,dc=jp'
 BIND_PASS = 'secret123'
 
 def main():
-    print("call main")
-    result = ldapaddmiyabi()
-    print(result)
+    result = delmiyabi2()
+    print = ('result')
 
-def ldapaddmiyabi():
-    print("call ldapaddmiyabi")
+def delmiyabi2():
     ld = LDAP(URI)
     ld.bind(BIND_DN,BIND_PASS)
-    result = ld.add('uid=miyabi2,ou=Users,dc=example,dc=jp',
+    result = ld.delete('uid=miyabi2,ou=Users,dc=example,dc=jp',
             [('objectClass',['top','person','inetOrgPerson','posixAccount']),
              ('uid',['miyabi2']),
              ('cn',['miyabi2']),
@@ -28,7 +28,7 @@ def ldapaddmiyabi():
              ('givenName',['miyabi2']),
              ('uidNumber',['1001']),
              ('gidNumber',['1001']),
-             ('homeDirectory',['/home/miyabi2']),
+             ('homeDirectry',['/home/miyabi2']),
              ('description',['Test6']),
              ('loginShell',['/bin/bash']),
              ('userPassword',['miyabi123'])
