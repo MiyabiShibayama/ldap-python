@@ -10,11 +10,18 @@ class ldapsearch1:
     BASE_DN ='dc=example,dc=jp'
     BIND_PASS ='secret123'
 
-    def ldapsearch_ou(uri,bind_dn,base_dn,bind_pass):
-        ld = LDAP(uri)
-        with LDAP(uri) as ld:
-            ld.bind(bind_dn,bind_pass)
-            result = ld.search(base_dn,LDAP_SCOPE_CHILD,'(|(cn=miyabi)(dc=jp))')
+def main():
+    print('main')
+    search = ldapsearch_ou('ldap://ldap.example.jp','cn=master,dc=example','dc=example,dc=jp','secret123')
+    print('searchしました')
+
+def ldapsearch_ou(uri,bind_dn,base_dn,bind_pass):
+    ldap = LDAP(URI)
+    ldap.bind(BIND_DN,BIND_PASS)
+    result = ldap.search(BASE_DN,LDAP_SCOPE_CHILD,'(|(cn=miyabi)(dc=jp))')
+    return result
 
 
-print('search1')
+print('global')
+
+main()

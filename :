@@ -13,7 +13,7 @@ BIND_PASS = 'secret123'
 
 def main():
     print('call main')
-    miyabiadd = ldapaadmiyabi('ldap://ldap.exmaple.jp','cn=miyabi2,dc=example','secret123',1001,'Test6'):
+    miyabi2 =ldapaadmiyabi('ldap://ldap.exmaple.jp','cn=miyabi2,dc=example','secret123',1001,'Test6'):
         print('追加されました')
 
 def ldapaddmiyabi(uri,bind_dn,bind_pass,gid,description):
