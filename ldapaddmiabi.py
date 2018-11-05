@@ -6,22 +6,35 @@
 from libldap import LDAP
 from libldap import LDAP_SCOPE_SUB
 
-URI = 'ldap://ldap.exmaple.jp'
-BIND_DN = 'cn=master,dc=example'
+URI = 'ldap://ldap.example.jp'
+BIND_DN = 'cn=master,dc=example,dc=jp'
 BASE_DN = 'dc=example,dc=jp'
 BIND_PASS = 'secret123'
 
+def main():
+    print('call main')
+    miyabiadd = ldapaddmiyabi()
+    print('追加されました')
 
-def ldapaddmiyabi(uri,bind_dn,bind_pass,gidNumber,description):
+def ldapaddmiyabi():
     ld = LDAP(URI)
     ld.bind(BIND_DN,BIND_PASS)
     result = ld.add('cn=miyabi2,ou=Users,dc=example,dc=jp',
-            [('objectClass',['top','posixAccount']),
+            [('objectClass',['top','person','inetOrgPerson','posixAccount']),
+             ('uid',['miyabi']),
              ('cn',['miyabi2']),
+             ('sn',['shibayama']),
+             ('givenName',['miyabi']),
+             ('uidNumber',['1001']),
              ('gidNumber',['1001']),
-             ('description',['Test6'])
+             ('homeDirectory',['/home/miyabi']),
+             ('description',['Test6']),
+             ('loginShell',['/bin/bash']),
+             ('userPassword',['miyabi123'])
                ])
     return result
 
-print('追加されました')
+print('add')
+
+main()
 

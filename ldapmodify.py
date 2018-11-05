@@ -11,21 +11,29 @@ BIND_PASS ='secret123'
 
 def main():
     print ('call main')
-    kekka = ldapmodify('ldap://ldap.exzmple.jp','cn=master,dc=example','dc=xample,dc=jp','secret123')
+    kekka = ldapmodify()
     print('modify')
 
-def ldapmodify(uri,bind_dn,base_dn,bind_pass):
-    ld = LDAP('ldap://ldap.exmaple.jp')
-    with LDAP(uri) as ld:
-        ld.bind(bind_dn,bind_pass)
-        for cn in range(min_cn,max_cn+1):
-            entry_dn = 'cn=sampleA' + str(cn) + 'ou=sampleB' + str(ou) + 'dc=example,dc=jp'
-        for ou in range(min_ou,max_ou+1):
-            entry_dn = 'cn=sampleA' + str(cn) + 'ou=sampleB' + str(ou) + 'dc=example,dc=jp'
-        result =  ld.modify('cn=sampleA,ou=sampleB,dc=example,dc=jp',['entry_dn',(['user1'], LDAP_MOD_ADD), ('description', ['Test Group One'], LDAP_MOD_REPLACE)])
-   
-    return result
-    
+def ldapmodify():
+    ld = LDAP(URI)
+    with LDAP(URI) as ld:
+        ld.bind(BIND_DN,BIND_PASS)
+        entry_dn =('cn=sampleA' + str('cn') + 'ou=sampleB' + str('ou') + ',dc=example,dc=jp')
+        entry =  ('cn=sampleA,ou=sampleB,dc=example,dc=jp',
+                [('entry_dn',(['user1'], LDAP_MOD_ADD),
+                 ('description', ['Test Group One'], LDAP_MOD_REPLACE),
+                 ('uid', [str('ou')]),
+                 ('uidNumber', [str('ou')]),
+                 ('gidNumber', [str('ou')]),
+                 ('homeDirectory', ['/home/test' + str('ou')]),
+                 ('cn', ['test' + str('ou')]),
+                 ('sn', ['test' + str('ou')]),
+                 ('userPassword', ['secret123'])
+                  )])
+        result=(entry_dn,entry)        
+        return result                  
+
+
 print('global')
 
 main()
