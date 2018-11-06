@@ -12,18 +12,21 @@ BIND_DN = 'uid=miyabi2,ou=Users,dc=example,dc=jp'
 BASE_DN = 'dc=example,dc=jp'
 BIND_PASS = 'miyabi123'
 
+
 def main():
     print("call main")
     result = delmiyabi2()
-    print("result")
+    print(result)
+
 
 def delmiyabi2():
     print("call dlmiyabi2")
     ld = LDAP(URI)
-    ld.bind(BIND_DN,BIND_PASS)
+    ld.bind(BIND_DN, BIND_PASS)
     result = ld.delete('uid=miyabi2,ou=Users,dc=example,dc=jp')
     ld.unbind()
     return result
+
 
 print("global")
 main()
