@@ -2,15 +2,16 @@
 # -*- coding: utf-8 -*-
 # vi: set expandtab shiftwidth=4 :
 
+#まだ途中
 
 # ldapdeletemiyabi.py
 
 from libldap import LDAP
 
 URI = 'ldap://ldap.example.jp'
-BIND_DN = 'uid=miyabi2,ou=Users,dc=example,dc=jp'
+BIND_DN = 'cn=master,dc=example,dc=jp'
 BASE_DN = 'dc=example,dc=jp'
-BIND_PASS = 'miyabi123'
+BIND_PASS = 'secret123'
 
 def main():
     print("call main")
